@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.hero {
+  height: 100vh;
+  background-image: url("img/foto\ de\ entrada.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 30px 60px;
+  box-sizing: border-box;
+}
+
+.logo,
+.menu a {
+  color: white;
+  text-decoration: none;
+}
+
+.menu a {
+  margin-left: 25px;
+}
+
+.texto-hero {
+  position: absolute;
+  left: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  z-index: 10;
+}
