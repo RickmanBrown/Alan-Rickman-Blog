@@ -4,40 +4,148 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  background-color: #050505;
+}
+
+/* SEÇÃO DE ENTRADA */
 .hero {
   height: 100vh;
-  background-image: url("img/foto\ de\ entrada.png");
+  width: 100%;
+  background-image: url("img/foto de entrada.png");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   position: relative;
 }
 
+/* MENU */
 .menu {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 1000;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   padding: 30px 60px;
-  box-sizing: border-box;
+
+  transition: 0.4s ease;
 }
 
-.logo,
-.menu a {
+/* CAMADA ESCURA DO MENU NO TOPO */
+.menu::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0)
+  );
+  z-index: -1;
+}
+
+/* MENU FIXO AO ROLAR */
+.menu.fixo {
+  position: fixed;
+  padding: 18px 60px;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.menu.fixo::before {
+  display: none;
+}
+
+/* LOGO */
+.logo {
   color: white;
   text-decoration: none;
+
+  font-family: 'Cinzel', serif;
+  letter-spacing: 2px;
+  font-size: 1rem;
+  font-weight: 600;
+
+  z-index: 1002;
 }
 
-.menu a {
-  margin-left: 25px;
+/* NAVEGAÇÃO */
+.nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 35px;
 }
 
+.nav a {
+  color: white;
+  text-decoration: none;
+
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  opacity: 0.85;
+  transition: 0.3s ease;
+}
+
+.nav a:hover {
+  opacity: 1;
+  letter-spacing: 2px;
+}
+
+/* BOTÃO HAMBÚRGUER */
+.hamburguer {
+  display: none;
+  width: 34px;
+  height: 26px;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  position: relative;
+  z-index: 1002;
+}
+
+.hamburguer span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  margin: 7px 0;
+  transition: 0.3s ease;
+}
+
+/* ANIMAÇÃO DO HAMBÚRGUER */
+.hamburguer.ativo span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburguer.ativo span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburguer.ativo span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* TEXTO DA ENTRADA */
 .texto-hero {
   position: absolute;
   left: 80px;
@@ -45,4 +153,135 @@
   transform: translateY(-50%);
   color: white;
   z-index: 10;
+}
+
+.texto-hero h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.texto-hero p {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+/* SEÇÕES DO SITE */
+.secao {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #050505;
+}
+
+/* RESPONSIVO - TABLETS */
+@media (max-width: 1024px) {
+  .menu {
+    padding: 28px 40px;
+  }
+
+  .menu.fixo {
+    padding: 18px 40px;
+  }
+
+  .nav ul {
+    gap: 24px;
+  }
+
+  .nav a {
+    font-size: 0.78rem;
+  }
+
+  .texto-hero {
+    left: 50px;
+  }
+
+  .texto-hero h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* RESPONSIVO - CELULARES E TABLETS MENORES */
+@media (max-width: 768px) {
+  .menu {
+    padding: 24px 28px;
+  }
+
+  .menu.fixo {
+    padding: 18px 28px;
+  }
+
+  .hamburguer {
+    display: block;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+
+    width: 75%;
+    max-width: 320px;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.94);
+    backdrop-filter: blur(10px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.4s ease;
+    z-index: 1001;
+  }
+
+  .nav.ativo {
+    right: 0;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .nav a {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+
+  .texto-hero {
+    left: 28px;
+    right: 28px;
+  }
+
+  .texto-hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .texto-hero p {
+    font-size: 1.05rem;
+  }
+}
+
+/* RESPONSIVO - CELULARES PEQUENOS */
+@media (max-width: 480px) {
+  .hero {
+    background-position: center;
+  }
+
+  .logo {
+    font-size: 0.9rem;
+  }
+
+  .texto-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .texto-hero p {
+    font-size: 1rem;
+  }
 }
